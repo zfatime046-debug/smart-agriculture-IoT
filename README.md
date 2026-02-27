@@ -13,25 +13,88 @@ Django-based IoT Smart Greenhouse Management System
 - Django
 - Python
 - Mysql Workbench
+# Smart IoT — Modélisation (MCD & MLD)
+
+## 1) Contexte
+Ce document présente la modélisation des données du projet **Smart IoT** :
+- **MCD** (Modèle Conceptuel de Données)
+- **MLD** (Modèle Logique de Données)
+
+---
+
+## 2) MCD (Modèle Conceptuel de Données)
+
+### Diagramme MCD
+<img width="1919" height="1005" alt="image" src="https://github.com/user-attachments/assets/dd208964-5dfe-4397-8904-976683f5e1e1" />
+
+
+## 3) MLD (Modèle Logique de Données)
+
+### Diagramme MLD
+<img width="1919" height="1006" alt="image" src="https://github.com/user-attachments/assets/8f69f5c5-10d8-4e7f-9b28-a0beee632660" />
+
+
+----------------------------------------------------------------------------------------------------------------------------
 
 ## Accueil
+
 <img width="1912" height="948" alt="image" src="https://github.com/user-attachments/assets/d9c9d315-47f2-454b-a61d-532f59b313e2" />
+
 <img width="1919" height="938" alt="image" src="https://github.com/user-attachments/assets/97f5d612-7b14-4034-aa5e-238a86423192" />
+
 <img width="1914" height="893" alt="image" src="https://github.com/user-attachments/assets/97449630-7737-4707-baf6-32ebd1bac992" />
+
 ## Serre
+
 <img width="1919" height="890" alt="image" src="https://github.com/user-attachments/assets/8ee32466-0b9a-4dab-91c2-d37a12b1e9ac" />
-## Mesure
+
+## Mesures
+
 <img width="1916" height="951" alt="image" src="https://github.com/user-attachments/assets/54f4575b-2e51-43c1-9384-791b95865f60" />
+
 <img width="1918" height="939" alt="image" src="https://github.com/user-attachments/assets/0768324f-ae16-40d5-a43d-c756f1141281" />
+
 ## Plante
+
 <img width="1919" height="965" alt="image" src="https://github.com/user-attachments/assets/9b4c9d34-fbcb-4520-a954-539126c44e70" />
+
 ##Actionneurs
+
 <img width="1916" height="948" alt="image" src="https://github.com/user-attachments/assets/dd2d88b0-b1f4-4e56-bae8-e10802b82ae3" />
+
 <img width="1910" height="942" alt="image" src="https://github.com/user-attachments/assets/6bb2e578-1665-4dbb-84b4-49f349ff1ed4" />
+
 ##Commandes
+
 <img width="1919" height="953" alt="image" src="https://github.com/user-attachments/assets/823cdc94-69fd-4a12-9f43-7e8068e78753" />
+
 <img width="1889" height="950" alt="image" src="https://github.com/user-attachments/assets/6ec9618c-37ed-4b51-9958-2d805e0bda95" />
+
 ##Règles d’automatisation
+
 <img width="1919" height="935" alt="image" src="https://github.com/user-attachments/assets/f18b2593-b2d3-440a-93a1-dcee43c37ec2" />
+
 ##Utilisateurs
+
 <img width="1917" height="738" alt="image" src="https://github.com/user-attachments/assets/34966e77-df85-4db7-a20e-8d8f044c27f7" />
+##Admin
+<img width="1919" height="956" alt="image" src="https://github.com/user-attachments/assets/d253e2f7-de9a-46c4-b713-239f382022fc" />
+
+<img width="1919" height="942" alt="image" src="https://github.com/user-attachments/assets/e3f02686-844a-4c02-8ef9-273d1aac7777" />
+
+<img width="1919" height="949" alt="image" src="https://github.com/user-attachments/assets/bc30a143-7d24-4494-9d8e-402153a08b7b" />
+
+<img width="1919" height="957" alt="image" src="https://github.com/user-attachments/assets/ba83aa61-2245-4df7-9646-54e1be751c4a" />
+
+<img width="1919" height="937" alt="image" src="https://github.com/user-attachments/assets/a620ccbf-5104-4de3-a901-cf214d12b2bd" />
+
+<img width="1919" height="881" alt="image" src="https://github.com/user-attachments/assets/5a0829c3-dda4-4c1e-8bb2-056bc28bf322" />
+
+<img width="1919" height="886" alt="image" src="https://github.com/user-attachments/assets/e6b6e818-39a4-4aa4-a2f2-8498b016e897" />
+
+
+🎬 Vidéo Démonstrative Smart IoT
+
+----Dans cette vidéo, je vais vous présenter le fonctionnement de notre solution Smart IoT, une plateforme intelligente qui permet de surveiller, contrôler et optimiser les équipements en temps réel:
+
+https://drive.google.com/file/d/1b2uZQQvSgO8mpvtwKH3xWjKJLNONErEw/view?usp=sharing
