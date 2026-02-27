@@ -1,0 +1,287 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<style>
+  :root {
+    --bg: #ffffff;
+    --muted: #6b7280;
+    --text: #111827;
+    --line: #e5e7eb;
+    --soft: #f9fafb;
+    --shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
+    --radius: 18px;
+  }
+
+  .page {
+    max-width: 1200px;
+    margin: 36px auto;
+    padding: 0 18px;
+    color: var(--text);
+  }
+
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+
+  .title h1 {
+    font-size: 44px;
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  .title p {
+    margin: 10px 0 0;
+    color: var(--muted);
+    font-size: 16px;
+  }
+
+  .tools {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    border: 1px solid var(--line);
+    background: var(--bg);
+    border-radius: 999px;
+    padding: 10px 14px;
+    color: var(--muted);
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    border-radius: 14px;
+    padding: 10px 12px;
+    min-width: 360px;
+  }
+  .search input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+  }
+  .search .icon {
+    font-size: 16px;
+    color: var(--muted);
+  }
+
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .table-wrap {
+    overflow: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 920px;
+  }
+  thead th {
+    text-align: left;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--soft);
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+  }
+  tbody tr:hover {
+    background: #fcfcfd;
+  }
+
+  .nowrap {
+    white-space: nowrap;
+  }
+  .muted {
+    color: var(--muted);
+  }
+
+  .value {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    border: 1px solid var(--line);
+    background: #fff;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #9ca3af;
+  }
+
+  @media (max-width: 700px) {
+    .title h1 {
+      font-size: 34px;
+    }
+    .search {
+      min-width: 220px;
+      width: 100%;
+    }
+    .tools {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }
+</style>
+
+<div class="page">
+  <div class="header">
+    <div class="title">
+      <h1>Mesures</h1>
+      <p>Historique des mesures reçues par les capteurs.</p>
+    </div>
+
+    <div class="tools">
+      <div class="search" title="Rechercher dans le tableau">
+        <span class="icon">🔎</span>
+        <input
+          id="q"
+          type="text"
+          placeholder="Rechercher (serre, capteur, unité, valeur…)"
+        />
+      </div>
+
+      <div class="pill">Total : {{ mesures|length }}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="table-wrap">
+      <table id="tbl">
+        <thead>
+          <tr>
+            <th class="nowrap">ID</th>
+            <th>Serre</th>
+            <th>Capteur</th>
+            <th class="nowrap">Valeur</th>
+            <th class="nowrap">Unité</th>
+            <th class="nowrap">Horodatage</th>
+          </tr>
+        </thead>
+
+       <tbody>
+  {% for m in mesures %}
+    <tr>
+      <!-- ID -->
+      <td class="nowrap">
+        {% if m.id_mesure %}
+          {{ m.id_mesure }}
+        {% else %}
+          {{ m.pk }}
+        {% endif %}
+      </td>
+
+      <!-- Serre -->
+      <td>
+        {% if m.capteur and m.capteur.serre %}
+          {{ m.capteur.serre.nom }}
+        {% else %}
+          <span class="muted">—</span>
+        {% endif %}
+      </td>
+
+      <!-- Capteur -->
+      <td>
+        {% if m.capteur %}
+          {{ m.capteur.type }}
+        {% else %}
+          <span class="muted">—</span>
+        {% endif %}
+      </td>
+
+      <!-- Valeur -->
+      <td class="nowrap value">
+        {% if m.valeur_mesuree %}
+          {{ m.valeur_mesuree }}
+        {% else %}
+          <span class="muted">—</span>
+        {% endif %}
+      </td>
+
+      <!-- Unité -->
+      <td class="nowrap">
+        {% if m.unite_mesure %}
+          <span class="badge"><span class="dot"></span>{{ m.unite_mesure }}</span>
+        {% else %}
+          <span class="muted">—</span>
+        {% endif %}
+      </td>
+
+      <!-- Horodatage -->
+      <td class="nowrap">
+        {% if m.horodatage %}
+          {{ m.horodatage|date:"d/m/Y H:i" }}
+        {% elif m.created_at %}
+          {{ m.created_at|date:"d/m/Y H:i" }}
+        {% else %}
+          <span class="muted">—</span>
+        {% endif %}
+      </td>
+    </tr>
+  {% empty %}
+    <tr>
+      <td colspan="6" class="muted" style="text-align:center; padding:18px;">
+        Aucune mesure enregistrée
+      </td>
+    </tr>
+  {% endfor %}
+</tbody>
+
+            </td>
+
+            <!-- Ca
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const input = document.getElementById("q");
+    const table = document.getElementById("tbl");
+    if (!input || !table) return;
+
+    input.addEventListener("input", function () {
+      const q = (this.value || "").toLowerCase().trim();
+      const rows = table.querySelectorAll("tbody tr");
+
+      rows.forEach((row) => {
+        const text = (row.innerText || "").toLowerCase();
+        row.style.display = text.includes(q) ? "" : "none";
+      });
+    });
+  })();
+</script>
+{% endblock %}

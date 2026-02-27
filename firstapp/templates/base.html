@@ -1,0 +1,240 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Smart Agriculture IoT</title>
+
+    <style>
+      :root {
+        --bg: #ffffff;
+        --soft: #f6f7fb;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --primary: #2563eb;
+        --border: #e5e7eb;
+      }
+      body {
+        font-family: system-ui, Arial;
+        color: var(--text);
+        background: var(--bg);
+        margin: 0;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: center;
+        margin: 10px 0 18px;
+      }
+      nav a {
+        text-decoration: none;
+        color: var(--primary);
+        font-weight: 600;
+      }
+      nav .right {
+        margin-left: auto;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        color: var(--muted);
+      }
+      hr {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 16px 0;
+      }
+
+      .hero {
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 26px;
+        background: linear-gradient(180deg, #ffffff, var(--soft));
+      }
+      .hero__tag {
+        color: var(--muted);
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        margin: 0 0 10px;
+      }
+      .hero h2 {
+        font-size: 42px;
+        margin: 0 0 10px;
+      }
+      .hero__lead {
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.7;
+        margin: 0 0 18px;
+        max-width: 70ch;
+      }
+      .hero__cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-weight: 700;
+        text-decoration: none;
+        border: 1px solid var(--border);
+      }
+      .btn--primary {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+      .btn--ghost {
+        background: white;
+        color: var(--primary);
+      }
+      .hero__stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .stat {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 12px;
+      }
+      .stat__value {
+        font-weight: 800;
+        margin: 0;
+      }
+      .stat__label {
+        color: var(--muted);
+        margin: 4px 0 0;
+      }
+
+      .section {
+        margin: 26px 0;
+      }
+      .section h3 {
+        font-size: 22px;
+        margin: 0 0 12px;
+      }
+      .text {
+        color: var(--muted);
+        line-height: 1.8;
+      }
+      .section--soft {
+        background: var(--soft);
+        border-radius: 18px;
+        padding: 18px;
+        border: 1px solid var(--border);
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .card {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 16px;
+      }
+      .card h4 {
+        margin: 0 0 8px;
+      }
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .services {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .service {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 16px;
+      }
+      .service h4 {
+        margin: 0 0 8px;
+      }
+      .service p {
+        margin: 0 0 10px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+      .link {
+        color: var(--primary);
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .bullets {
+        color: var(--muted);
+        line-height: 1.9;
+      }
+      .footer {
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+        padding-top: 14px;
+        margin-top: 26px;
+      }
+
+      @media (max-width: 900px) {
+        .hero h2 {
+          font-size: 34px;
+        }
+        .hero__stats {
+          grid-template-columns: 1fr;
+        }
+        .cards {
+          grid-template-columns: 1fr;
+        }
+        .services {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🌱 Smart Agriculture IoT</h1>
+
+    <nav>
+      <a href="{% url 'home_list' %}">Accueil</a>
+      <a href="{% url 'serre_list' %}">Serre</a>
+      <a href="{% url 'capteur_list' %}">Capteur</a>
+      <a href="{% url 'mesure_list' %}">Mesure</a>
+      <a href="{% url 'plante_list' %}">Plante</a>
+      <a href="{% url 'actionneur_list' %}">Actionneur</a>
+      <a href="{% url 'commande_list' %}">Commande</a>
+      <a href="{% url 'regle_list' %}">Règle</a>
+      <a href="{% url 'utilisateur_list' %}">Utilisateurs</a>
+      {% if user.is_authenticated %} Bonjour {{ user.username }}
+
+      <form action="{% url 'logout' %}" method="post" style="display: inline">
+        {% csrf_token %}
+        <button
+          type="submit"
+          style="background: none; border: none; color: blue; cursor: pointer"
+        >
+          Logout
+        </button>
+      </form>
+      {% else %}
+      <a href="{% url 'register' %}">Inscription</a>
+      <a href="{% url 'login' %}">Se connecter</a>
+      {% endif %}
+    </nav>
+
+    <hr />
+
+    {% block content %}{% endblock %}
+  </body>
+</html>

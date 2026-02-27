@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block content %}
+<h2>Modifier l’utilisateur</h2>
+
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Mettre à jour</button>
+  <a href="{% url 'utilisateur_list' %}">Annuler</a>
+</form>
+{% endblock %}

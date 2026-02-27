@@ -1,0 +1,151 @@
+{% extends "base.html" %} {% block content %}
+<header class="hero">
+  <div class="hero__content">
+    <p class="hero__tag">Plateforme de supervision agricole</p>
+    <h2>Smart Agriculture IoT</h2>
+    <p class="hero__lead">
+      Une application intelligente pour surveiller vos serres, analyser les
+      mesures en temps réel et améliorer la productivité tout en réduisant les
+      coûts et les risques.
+    </p>
+
+    <div class="hero__cta">
+      <a class="btn btn--primary" href="{% url 'serre_list' %}"
+        >Explorer les serres</a
+      >
+      <a class="btn btn--ghost" href="{% url 'plante_list' %}"
+        >Voir les plantes</a
+      >
+    </div>
+
+    <div class="hero__stats">
+      <div class="stat">
+        <p class="stat__value">Temps réel</p>
+        <p class="stat__label">Suivi & alertes</p>
+      </div>
+      <div class="stat">
+        <p class="stat__value">Données</p>
+        <p class="stat__label">Mesures & historique</p>
+      </div>
+      <div class="stat">
+        <p class="stat__value">Décisions</p>
+        <p class="stat__label">Optimisation</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <h3>Notre objectif</h3>
+  <p class="text">
+    Notre mission est d’aider les agriculteurs et gestionnaires de serres à
+    prendre de meilleures décisions grâce à la collecte de données, l’analyse et
+    l’automatisation. L’objectif principal est de garantir une production plus
+    stable, une meilleure qualité et une consommation optimisée des ressources
+    (eau, énergie, intrants).
+  </p>
+
+  <div class="cards">
+    <article class="card">
+      <h4>Surveiller</h4>
+      <p>
+        Suivi des serres, capteurs et mesures (température, humidité, etc.) pour
+        une vision claire du terrain.
+      </p>
+    </article>
+
+    <article class="card">
+      <h4>Analyser</h4>
+      <p>
+        Historique, tendances et lecture rapide des informations pour identifier
+        les anomalies et anticiper.
+      </p>
+    </article>
+
+    <article class="card">
+      <h4>Agir</h4>
+      <p>
+        Gestion des actionneurs et règles pour déclencher des actions adaptées
+        au bon moment.
+      </p>
+    </article>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <h3>Nos services</h3>
+
+  <div class="services">
+    <div class="service">
+      <h4>Gestion des serres</h4>
+      <p>
+        Centralisez les informations des serres et accédez rapidement aux
+        détails de chaque installation.
+      </p>
+      <a class="link" href="{% url 'serre_list' %}">Accéder</a>
+    </div>
+
+    <div class="service">
+      <h4>Capteurs & mesures</h4>
+      <p>
+        Visualisez les mesures collectées et suivez l’évolution des paramètres
+        clés.
+      </p>
+      <a class="link" href="{% url 'capteur_list' %}">Capteurs</a> ·
+      <a class="link" href="{% url 'mesure_list' %}">Mesures</a>
+    </div>
+
+    <div class="service">
+      <h4>Plantes & production</h4>
+      <p>
+        Suivez les cultures, leurs informations et leur association avec les
+        serres.
+      </p>
+      <a class="link" href="{% url 'plante_list' %}">Plantes</a>
+    </div>
+
+    <div class="service">
+      <h4>Actionneurs & commandes</h4>
+      <p>
+        Pilotez les équipements et tracez les commandes pour assurer un contrôle
+        opérationnel.
+      </p>
+      <a class="link" href="{% url 'actionneur_list' %}"
+        >Actionneurs</a
+      >
+      ·
+      <a class="link" href="{% url 'commande_list' %}">Commandes</a>
+    </div>
+
+    {% if 'regle_list' %}
+    <div class="service">
+      <h4>Règles & automatisation</h4>
+      <p>
+        Définissez des règles pour automatiser les actions et sécuriser le
+        fonctionnement.
+      </p>
+      <a class="link" href="{% url 'regle_list' %}">Règles</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section">
+  <h3>Pourquoi notre application ?</h3>
+  <ul class="bullets">
+    <li>Interface simple et claire pour une utilisation quotidienne.</li>
+    <li>Meilleure réactivité grâce à la supervision en temps réel.</li>
+    <li>Traçabilité des données (mesures, commandes) pour un suivi fiable.</li>
+    <li>
+      Base solide pour évoluer vers des alertes avancées et des dashboards.
+    </li>
+  </ul>
+</section>
+
+<footer class="footer">
+  <p>
+    © {{ now|date:"Y" }} Smart Agriculture IoT — Supervision agricole
+    intelligente.
+  </p>
+</footer>
+{% endblock %}

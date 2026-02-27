@@ -1,0 +1,199 @@
+{% extends "base.html" %} {% block content %}
+<style>
+  /* --- PAGE PLANTE (scopé) --- */
+  .page-title {
+    font-size: 44px;
+    font-weight: 800;
+    margin: 22px 0 18px;
+    letter-spacing: -0.03em;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(2, 6, 23, 0.06);
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 26px 26px 10px;
+  }
+  .card-header h2 {
+    margin: 0;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .card-header p {
+    margin: 10px 0 0;
+    color: #64748b;
+    font-size: 18px;
+  }
+
+  /* IMPORTANT: scroll horizontal si écran petit */
+  .table-wrap {
+    padding: 14px 18px 24px;
+    overflow-x: auto;
+  }
+
+  table.plants-table {
+    width: 100%;
+    min-width: 980px; /* empêche l’écrasement */
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .plants-table thead th {
+    position: sticky;
+    top: 0; /* sticky header */
+    z-index: 1;
+    background: #f8fafc;
+    color: #64748b;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    padding: 16px 14px;
+    border-bottom: 1px solid #e2e8f0;
+    white-space: nowrap;
+  }
+
+  .plants-table tbody td {
+    padding: 14px;
+    border-bottom: 1px solid #e2e8f0;
+    font-weight: 600;
+    vertical-align: middle;
+    white-space: nowrap; /* garde les colonnes propres */
+  }
+  .plants-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .plants-table tbody tr:hover td {
+    background: #fbfdff;
+  }
+
+  /* Largeurs + alignements */
+  .col-id {
+    width: 70px;
+    text-align: center;
+  }
+  .col-serre {
+    width: 320px;
+  }
+  .col-espece {
+    width: 140px;
+  }
+  .col-variete {
+    width: 260px;
+  }
+  .col-stade {
+    width: 160px;
+  }
+  .col-date {
+    width: 170px;
+  }
+  .col-densite {
+    width: 120px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .muted {
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  /* Mobile: on laisse le scroll horizontal */
+  @media (max-width: 900px) {
+    .page-title {
+      font-size: 34px;
+    }
+    .card-header h2 {
+      font-size: 26px;
+    }
+    .card-header p {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<h1 class="page-title">Plantes</h1>
+
+<section class="card">
+  <div class="card-header">
+    <h2>Liste des plantes</h2>
+    <p>Suivi des cultures par serre, espèce, stade et densité</p>
+  </div>
+
+  <div class="table-wrap">
+    <table class="plants-table">
+      <thead>
+        <tr>
+          <th class="col-id">ID</th>
+          <th class="col-serre">Serre</th>
+          <th class="col-espece">Espèce</th>
+          <th class="col-variete">Variété</th>
+          <th class="col-stade">Stade</th>
+          <th class="col-date">Date plantation</th>
+          <th class="col-densite">Densité</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td class="col-id">1</td>
+          <td class="col-serre">Serre Palmeraie - Tomate</td>
+          <td class="col-espece">Tomate</td>
+          <td class="col-variete muted">Ronde (marché local)</td>
+          <td class="col-stade">Floraison</td>
+          <td class="col-date">Nov. 25, 2024</td>
+          <td class="col-densite">2.60</td>
+        </tr>
+
+        <tr>
+          <td class="col-id">2</td>
+          <td class="col-serre">Serre Route Ourika - Concombre</td>
+          <td class="col-espece">Concombre</td>
+          <td class="col-variete muted">Long hollandais</td>
+          <td class="col-stade">Fructification</td>
+          <td class="col-date">Oct. 20, 2024</td>
+          <td class="col-densite">1.80</td>
+        </tr>
+
+        <tr>
+          <td class="col-id">3</td>
+          <td class="col-serre">Serre Tameslouht - Poivron</td>
+          <td class="col-espece">Poivron</td>
+          <td class="col-variete muted">California Wonder</td>
+          <td class="col-stade">Nouaison</td>
+          <td class="col-date">Sept. 28, 2024</td>
+          <td class="col-densite">2.20</td>
+        </tr>
+
+        <tr>
+          <td class="col-id">4</td>
+          <td class="col-serre">Serre Aït Ourir - Fraise</td>
+          <td class="col-espece">Fraise</td>
+          <td class="col-variete muted">Camarosa</td>
+          <td class="col-stade">Récolte</td>
+          <td class="col-date">Nov. 5, 2024</td>
+          <td class="col-densite">6.50</td>
+        </tr>
+
+        <tr>
+          <td class="col-id">5</td>
+          <td class="col-serre">Serre Essai Sidi Ghanem - Aromatiques</td>
+          <td class="col-espece">Basilic</td>
+          <td class="col-variete muted">Grand vert</td>
+          <td class="col-stade">Jeune plant</td>
+          <td class="col-date">Jan. 5, 2025</td>
+          <td class="col-densite">25.00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

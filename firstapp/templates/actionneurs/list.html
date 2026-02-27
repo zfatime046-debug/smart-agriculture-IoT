@@ -1,0 +1,119 @@
+{% extends "base.html" %} {% block content %}
+<style>
+  .table-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+
+  th {
+    background: #f8f9fb;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #555;
+  }
+
+  tr:hover {
+    background: #fafafa;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .badge.on {
+    background: #e6f7ee;
+    color: #0f7b44;
+  }
+
+  .badge.off {
+    background: #fdecea;
+    color: #a8071a;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .muted {
+    color: #999;
+  }
+
+  .nowrap {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    .hide-sm {
+      display: none;
+    }
+  }
+</style>
+
+<h2>⚙️ Actionneurs</h2>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Serre</th>
+        <th>Type</th>
+        <th>État</th>
+        <th class="hide-sm">Puissance</th>
+        <th>Date installation</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for a in actionneurs %}
+      <tr>
+        <td>{{ a.id_actionneur }}</td>
+        <td>{{ a.serre.nom }}</td>
+        <td>{{ a.type }}</td>
+
+        <td>
+          {% if a.etat_actuel == "on" %}
+          <span class="badge on"><span class="dot"></span> ON </span>
+          {% else %}
+          <span class="badge off"><span class="dot"></span> OFF </span>
+          {% endif %}
+        </td>
+
+        <td class="hide-sm">{{ a.puissance }}</td>
+
+        <td class="nowrap">
+          {% if a.date_installation %} {{ a.date_installation }} {% else %}
+          <span class="muted">—</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

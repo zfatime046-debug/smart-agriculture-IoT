@@ -1,0 +1,282 @@
+{% extends "base.html" %} {% block content %}
+
+<style>
+  :root {
+    --bg: #ffffff;
+    --card: #ffffff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --line: #e2e8f0;
+    --head: #f8fafc;
+
+    --ok: #16a34a;
+    --bad: #ef4444;
+    --warn: #f59e0b;
+
+    --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    --radius: 16px;
+  }
+
+  .page {
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 0 14px;
+    color: var(--text);
+  }
+
+  .page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .title-wrap h1 {
+    margin: 0;
+    font-size: 28px;
+    letter-spacing: 0.2px;
+  }
+  .title-wrap p {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .tools {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--bg);
+    min-width: 260px;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+  }
+  .search input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    color: var(--text);
+    background: transparent;
+  }
+  .chip {
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--head);
+    color: var(--muted);
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  thead th {
+    text-align: left;
+    padding: 12px 14px;
+    background: var(--head);
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+    color: #334155;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  tbody td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  tbody tr:hover {
+    background: #fbfdff;
+  }
+
+  .nowrap {
+    white-space: nowrap;
+  }
+  .muted {
+    color: var(--muted);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 12px;
+    border: 1px solid transparent;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .badge.ok {
+    color: var(--ok);
+    background: rgba(22, 163, 74, 0.08);
+    border-color: rgba(22, 163, 74, 0.18);
+  }
+  .badge.ok .dot {
+    background: var(--ok);
+  }
+
+  .badge.wait {
+    color: var(--warn);
+    background: rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.22);
+  }
+  .badge.wait .dot {
+    background: var(--warn);
+  }
+
+  .badge.fail {
+    color: var(--bad);
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.22);
+  }
+  .badge.fail .dot {
+    background: var(--bad);
+  }
+
+  .empty {
+    padding: 18px;
+    text-align: center;
+    color: var(--muted);
+  }
+
+  /* Responsive: cacher certaines colonnes sur petits écrans */
+  @media (max-width: 760px) {
+    .hide-sm {
+      display: none;
+    }
+    .search {
+      min-width: 200px;
+    }
+    thead th {
+      font-size: 12px;
+    }
+  }
+</style>
+
+<div class="page">
+  <div class="page-header">
+    <div class="title-wrap">
+      <h1>Commandes</h1>
+      <p>
+        Historique des commandes envoyées aux actionneurs (sans la colonne
+        Utilisateur).
+      </p>
+    </div>
+
+    <div class="tools">
+      <div class="search">
+        <span class="muted">🔎</span>
+        <input
+          id="q"
+          type="text"
+          placeholder="Rechercher actionneur / serre / statut..."
+          onkeyup="filterTable()"
+        />
+      </div>
+      <span class="chip">Total : {{ commandes|length }}</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <table id="cmdTable">
+      <thead>
+        <tr>
+          <th class="nowrap">ID</th>
+          <th>Actionneur</th>
+          <th class="hide-sm">Serre</th>
+          <th class="nowrap">Date</th>
+          <th class="nowrap">Heure</th>
+          <th class="nowrap">Statut</th>
+        </tr>
+      </thead>
+<tbody>
+{% for cmd in commandes %}
+<tr>
+  <td>{{ cmd.id_commande }}</td>
+
+  <td>
+    {% if cmd.actionneur %}
+      {{ cmd.actionneur.type }}
+    {% else %}
+      <span class="muted">—</span>
+    {% endif %}
+  </td>
+
+  <td>
+    {% if cmd.actionneur and cmd.actionneur.serre %}
+      {{ cmd.actionneur.serre.nom }}
+    {% else %}
+      <span class="muted">—</span>
+    {% endif %}
+  </td>
+
+  <td class="nowrap">
+    {{ cmd.date_declenchement|date:"d/m/Y" }}
+  </td>
+
+  <td class="nowrap">
+    {{ cmd.heure_declenchement|time:"H:i" }}
+  </td>
+
+  <td>
+    {% if cmd.statut|lower == "executee" %}
+      <span class="badge ok"><span class="dot"></span> Exécutée</span>
+    {% else %}
+      <span class="badge off"><span class="dot"></span> {{ cmd.statut }}</span>
+    {% endif %}
+  </td>
+</tr>
+{% empty %}
+<tr>
+  <td colspan="6" class="muted">Aucune commande</td>
+</tr>
+{% endfor %}
+</tbody>
+
+          </td>
+    </table>
+  </div>
+</div>
+
+<script>
+  function filterTable() {
+    const q = document.getElementById("q").value.toLowerCase();
+    const rows = document.querySelectorAll("#cmdTable tbody tr");
+    rows.forEach((r) => {
+      // ignore la ligne empty
+      const text = r.innerText.toLowerCase();
+      r.style.display = text.includes(q) ? "" : "none";
+    });
+  }
+</script>
+
+{% endblock %}

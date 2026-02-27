@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block content %}
+<h2>Utilisateurs</h2>
+
+{% if utilisateurs %}
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Email</th>
+      <th>Rôle</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for u in utilisateurs %}
+    <tr>
+      <td>{{ u.id_utilisateur }}</td>
+      <td>{{ u.nom }}</td>
+      <td>{{ u.prenom }}</td>
+      <td>{{ u.email }}</td>
+      <td>{{ u.role }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %} {% endblock %}
