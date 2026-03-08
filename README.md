@@ -97,4 +97,8 @@ Ce document présente la modélisation des données du projet **Smart IoT** :
 
 ----Dans cette vidéo, je vais vous présenter le fonctionnement de notre solution Smart IoT, une plateforme intelligente qui permet de surveiller, contrôler et optimiser les équipements en temps réel:
 
-https://drive.google.com/file/d/1b2uZQQvSgO8mpvtwKH3xWjKJLNONErEw/view?usp=sharing
+
+https://github.com/user-attachments/assets/824f7a51-d1d0-433d-9cf4-3ac59b9df261
+
+
+
